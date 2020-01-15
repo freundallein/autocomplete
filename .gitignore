@@ -1,0 +1,7 @@
+# dirs
+.vscode
+.env
+localdb/
+
+# files
+*.pyc

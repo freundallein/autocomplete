@@ -1,0 +1,41 @@
+version: "3.5"
+
+networks:
+  network:
+    name: example-network
+    driver: bridge
+
+services:
+  autocomplete:
+    image: freundallein/autocomplete:latest
+    container_name: autocomplete
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - TOP=10
+      - DB_HOST=mongo
+      - DB_PORT=27017
+      - DB_USER=autocomplete
+      - DB_PASSWORD=autocomplete
+    depends_on: 
+      - mongo
+    networks: 
+      - network
+    ports:
+      - 8000:8000
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=autocomplete
+      - MONGO_INITDB_ROOT_PASSWORD=autocomplete
+    command: --wiredTigerCacheSizeGB 1.5
+    volumes:
+      -  ./localdb:/data/db
+    networks: 
+      - network
+    ports:
+      - 27017:27017
