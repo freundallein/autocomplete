@@ -5,17 +5,17 @@ from utils.serialization import dumps
 
 
 __all__ = (
-    "get_word",
+    "get_words",
     "add_word",
     "healthz",
 )
 
 
-async def get_word(request):
+async def get_words(request):
     # GET http://0.0.0.0:8000/?prefix=Example&top=100
     prefix = request.rel_url.query.get("prefix")
     if not prefix:
-        return json_response({"error": "no prefix provided"})
+        return json_response({"error": "no prefix provided"}, status=400)
     try:
         top = int(request.rel_url.query.get("top", request.app["config"]["top"]))
     except ValueError:
@@ -31,7 +31,7 @@ async def add_word(request):
     body = await request.json()
     new_word = body.get("word")
     if not new_word:
-        return json_response({"error": "body should contain 'word' key"})
+        return json_response({"error": "body should contain 'word' key"}, status=400)
     service = request.app["service"]
     await service.add_word(new_word)
     return json_response({"error": None})

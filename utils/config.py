@@ -2,7 +2,7 @@
 import os
 import asyncio
 
-from handlers import add_word, get_word, healthz
+from handlers import add_word, get_words, healthz
 from db.mongo import PersistentStorage
 from service import Service, Trie
 
@@ -31,7 +31,7 @@ def get_config_value(key, fallback: str) -> str:
 
 def setup_routes(app) -> None:
     app.router.add_get('/healthz', healthz)
-    app.router.add_get('/', get_word)
+    app.router.add_get('/', get_words)
     app.router.add_post('/', add_word)
 
 

@@ -1,7 +1,7 @@
-from .handlers import get_word, add_word, healthz
+from .handlers import get_words, add_word, healthz
 
 __all__ = (
-    "get_word",
+    "get_words",
     "add_word",
     "healthz",
 )
