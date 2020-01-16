@@ -74,7 +74,7 @@ services:
 After start you have service with loaded to persistent storage corpus of english words with some frequency.
 You can make http requests: 
 ```
-GET 0.0.0.0:8000/?prefix=a&top=5
+GET 0.0.0.0:8000/?prefix=a&top=3
 ```
 will return  
 `{"words": [{"word": "a", "frequency": 155432}, {"word": "are", "frequency": 49961}, {"word": "and", "frequency": 41182}], "len": 3}`
