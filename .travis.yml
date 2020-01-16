@@ -1,0 +1,20 @@
+language: python
+service: docker
+
+jobs:
+  include:
+    - stage: test
+      name: "Unit tests"
+      python: 3.7
+      install:
+        - pip install -r requirements-dev.txt
+      script: make test-full
+
+    - stage: build
+      name: "Distribute"
+      if: branch = master
+      script: make distribute
+  
+notifications:
+  on_success: never
+  on_failure: never
