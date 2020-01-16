@@ -29,9 +29,11 @@ class Trie(object):
             if curr.children.get(char) is None:
                 curr.children[char] = Node(char, False, 0, {})
             curr = curr.children[char]
+        if not curr.is_word:
+            self.size += 1
         curr.is_word = True
         curr.frequency += item.frequency
-        self.size += 1
+        
 
     def get_words(self, prefix: str) -> List[Word]:
         curr = self.store
@@ -39,15 +41,17 @@ class Trie(object):
             if curr is None:
                 return []
             curr = curr.children.get(char)
-            if curr is None:
-                return []
-        return [Word(prefix + postfix, frequency) for postfix, frequency in self.compose_words(curr)]
+        return [
+            Word(prefix + postfix, frequency)
+            for postfix, frequency in self._compose_words(curr)
+        ]
 
-    def compose_words(self, node: Node) -> List[str]:
+    def _compose_words(self, node: Node) -> List[str]:
         result = []
+        if node is None:
+            return result
         if node.is_word:
             result.append(("", node.frequency))
-        
         stack = [(child, "") for child in node.children.values()]
         while stack:
             item = stack.pop()

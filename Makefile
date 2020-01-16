@@ -2,12 +2,12 @@ export IMAGE_NAME=freundallein/autocomplete:latest
 
 init:
 	git config core.hooksPath .githooks
-activate:
-	/bin/bash -c "source .env/bin/activate"
 run:
 	python app.py
 test:
-	echo "Test
+	pytest -m "not slow"
+test-full:
+	pytest
 dockerbuild:
 	docker build -t $$IMAGE_NAME -f Dockerfile .
 distribute:

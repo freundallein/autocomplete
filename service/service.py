@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from typing import List, Dict, Tuple
+from typing import List, Tuple
 from dataclasses import dataclass
 
 __all__ = (
@@ -29,8 +29,6 @@ class Service(object):
         self.ready = False
 
     async def add_word(self, word: str, frequency: int = 1) -> None:
-        if word == "abb":
-            print(word, frequency)
         self.datastore.add_word(Word(word, frequency))
         if self.persistent_storage:
             await self.persistent_storage.add_word((word, frequency))
@@ -50,7 +48,8 @@ class Service(object):
             pairs = await self.persistent_storage.get_words()
         if not pairs:
             pairs = self.load_corpus()
-            await self.persistent_storage.fill(pairs)
+            if self.persistent_storage:
+                await self.persistent_storage.fill(pairs)
         self.fill_datastore(pairs)
         self.ready = True
 
@@ -63,4 +62,3 @@ class Service(object):
                 pairs.append((line[0], int(line[1])))
                 line = f.readline()
         return pairs
-        

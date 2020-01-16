@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
-
 from aiohttp.web import json_response, Response
 
 from utils.serialization import dumps
@@ -33,7 +31,7 @@ async def add_word(request):
     body = await request.json()
     new_word = body.get("word")
     if not new_word:
-        return json_response({"error": "body should contain 'word' key"})    
+        return json_response({"error": "body should contain 'word' key"})
     service = request.app["service"]
     await service.add_word(new_word)
     return json_response({"error": None})
@@ -42,7 +40,7 @@ async def add_word(request):
 async def healthz(request):
     service = request.app["service"]
     response = {
-        True: ("READY", 200), 
+        True: ("READY", 200),
         False: ("NOT READY", 500),
     }[service.ready]
     return Response(text=response[0], status=response[1])

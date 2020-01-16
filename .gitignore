@@ -1,5 +1,6 @@
 # dirs
 .vscode
+.pytest_cache
 .env
 localdb/
 

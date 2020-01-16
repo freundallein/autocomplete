@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-import dataclasses, json
+import json
+import dataclasses
 
 __all__ = (
     "dumps",
 )
+
 
 def dumps(data):
     return json.dumps(data, cls=CustomJSONEncoder)

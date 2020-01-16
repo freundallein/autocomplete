@@ -1,6 +1,15 @@
+# dirs
+.env/
 docs/
+.pytest_cache/
+.githooks
+# files
 .gitignore
 .travis.yml
 Dockerfile
 Makefile
 README.md
+requirements-dev.txt
+pytest.ini
+conftest.py
+*_test.py
