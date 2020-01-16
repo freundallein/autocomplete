@@ -9,7 +9,6 @@ class PersistentStorage(object):
     DB_COLLECTION = "en_corpus"
 
     def __init__(self, dsn):
-        # docker run -it --rm --name mongodb -p 27017:27017 mongo
         client = AsyncIOMotorClient(dsn)
         db = client[self.DB_NAME]
         self.collection = db[self.DB_COLLECTION]

@@ -38,6 +38,7 @@ async def add_word(request):
 
 
 async def healthz(request):
+    # GET http://0.0.0.0:8000/healthz
     service = request.app["service"]
     response = {
         True: ("READY", 200),
