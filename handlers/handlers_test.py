@@ -54,4 +54,3 @@ async def test_healthz_not_ready(aiohttp_client, configured_app):
     assert resp.status == 500
     text = await resp.text()
     assert text == "NOT READY"
-    assert 0
