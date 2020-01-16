@@ -37,5 +37,4 @@ services:
       -  ./localdb:/data/db
     networks: 
       - network
-    ports:
-      - 27017:27017
+  

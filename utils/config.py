@@ -2,6 +2,8 @@
 import os
 import asyncio
 
+from aiohttp_prometheus import MetricsMiddleware, MetricsView
+
 from handlers import add_word, get_words, healthz
 from db.mongo import PersistentStorage
 from service import Service, Trie
@@ -30,6 +32,8 @@ def get_config_value(key, fallback: str) -> str:
 
 
 def setup_routes(app) -> None:
+    app.middlewares.append(MetricsMiddleware())
+    app.router.add_get('/metrics', MetricsView),
     app.router.add_get('/healthz', healthz)
     app.router.add_get('/', get_words)
     app.router.add_post('/', add_word)
