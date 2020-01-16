@@ -21,7 +21,8 @@ def test_configure_app(empty_app):
     for key, value in expected_keys.items():
         assert empty_app["config"][key] == value
 
-@mock.patch.dict(os.environ,{"HOST": "127.0.0.1"})
+
+@mock.patch.dict(os.environ, {"HOST": "127.0.0.1"})
 def test_get_config_value():
     assert get_config_value("HOST", "") == "127.0.0.1"
     assert get_config_value("HOST_TEST", "1.2.3.4") == "1.2.3.4"

@@ -62,7 +62,6 @@ class Service(object):
         self.fill_datastore(pairs)
         self.ready = True
         logging.info("[service] restored and ready")
-        
 
     def load_corpus(self) -> List[Tuple[str, int]]:
         pairs = []

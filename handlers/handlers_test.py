@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from aiohttp import web
-
 
 @pytest.mark.slow
 async def test_get_words(aiohttp_client, configured_app):

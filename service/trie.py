@@ -33,7 +33,6 @@ class Trie(object):
             self.size += 1
         curr.is_word = True
         curr.frequency += item.frequency
-        
 
     def get_words(self, prefix: str) -> List[Word]:
         curr = self.store
